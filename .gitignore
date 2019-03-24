@@ -23,4 +23,9 @@
 hs_err_pid*
 
 .idea/
+gradle/
+.gradle/
+out/
 chess.iml
+gradlew
+gradlew.bat
