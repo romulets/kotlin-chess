@@ -7,4 +7,12 @@ class Queen(
     override val position: Position
 ) : Piece {
 
+    override fun canWalk(position: Position): Boolean {
+        TODO("not implemented")
+    }
+
+    override fun walk(position: Position) {
+        TODO("not implemented")
+    }
+
 }

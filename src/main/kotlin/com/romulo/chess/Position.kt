@@ -7,5 +7,16 @@ data class Position(val number: Int, val letter: Char) {
         }
     }
 
-    public fun isAt(number: Int, letter: Char) : Boolean = this.number.equals(number) && this.letter.equals(letter)
+    fun isAt(number: Int, letter: Char) : Boolean = this.number.equals(number) && this.letter.equals(letter)
+
+    fun isStraightForward(other: Position): Boolean = this.letter == other.letter && other.number > this.number
+    fun isStraightBackward(other: Position): Boolean = this.letter == other.letter && other.number < this.number
+
+    fun distanceTo(other: Position): Int {
+        if (isStraightForward(other) || isStraightBackward(other)) {
+            return Math.abs(this.number - other.number)
+        }
+
+        return 0
+    }
 }
