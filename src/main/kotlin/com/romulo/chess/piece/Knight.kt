@@ -1,5 +1,10 @@
 package com.romulo.chess.piece
 
-class Knight (override val color: Color) : Piece{
+import com.romulo.chess.Position
+
+class Knight(
+    override val color: Color,
+    override val position: Position
+) : Piece {
 
 }

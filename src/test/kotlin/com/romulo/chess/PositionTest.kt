@@ -13,8 +13,13 @@ class PositionTest {
     }
 
     @Test(expected = IllegalArgumentException::class)
-    fun testInvalidPosition() {
+    fun testInvalidRow() {
         Position(0, 'g')
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun testInvalidLetter() {
+        Position(0, 'i')
     }
 
 }
