@@ -29,7 +29,7 @@ class Pawn(
         return position.distanceTo(possiblePosition) == 2 && walks == 0
     }
 
-    override fun walk(position: Position) {
+    override fun move(position: Position) {
         this.position = position
         walks++
     }

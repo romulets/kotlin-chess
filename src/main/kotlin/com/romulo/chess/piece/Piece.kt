@@ -7,6 +7,6 @@ interface Piece {
     val position: Position
 
     fun canWalk(possiblePosition: Position) : Boolean
-    fun walk(position: Position)
+    fun move(position: Position)
 
 }

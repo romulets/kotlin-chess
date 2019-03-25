@@ -11,7 +11,7 @@ class Queen(
         TODO("not implemented")
     }
 
-    override fun walk(position: Position) {
+    override fun move(position: Position) {
         TODO("not implemented")
     }
 
