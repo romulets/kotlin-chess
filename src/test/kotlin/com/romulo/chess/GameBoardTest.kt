@@ -1,8 +1,8 @@
 package com.romulo.chess
 
 import com.romulo.chess.piece.*
-import com.romulo.chess.piece.Color.BLACK
-import com.romulo.chess.piece.Color.WHITE
+import com.romulo.chess.Color.BLACK
+import com.romulo.chess.Color.WHITE
 import org.junit.Assert.*
 import org.junit.Test
 import kotlin.reflect.KClass

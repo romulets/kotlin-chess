@@ -1,7 +1,7 @@
 package com.romulo.chess
 
 import com.romulo.chess.piece.*
-import com.romulo.chess.piece.Color.*
+import com.romulo.chess.Color.*
 
 class GameBoard {
 

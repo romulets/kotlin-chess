@@ -1,5 +1,6 @@
 package com.romulo.chess.piece
 
+import com.romulo.chess.Color
 import com.romulo.chess.Position
 
 class Knight(
