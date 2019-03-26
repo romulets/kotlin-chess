@@ -26,6 +26,7 @@ hs_err_pid*
 gradle/
 .gradle/
 out/
+build/
 chess.iml
 gradlew
 gradlew.bat

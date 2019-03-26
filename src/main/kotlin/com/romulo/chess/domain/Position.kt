@@ -1,4 +1,4 @@
-package com.romulo.chess
+package com.romulo.chess.domain
 
 data class Position(
     val number: Int,
@@ -31,5 +31,7 @@ data class Position(
     fun emptyPosition() : Position = position(number, letter)
 }
 
-fun fullPosition(number: Int, letter: Char) : Position = Position(number, letter, full = true)
-fun position(number: Int, letter: Char) : Position = Position(number, letter, full = false)
+fun fullPosition(number: Int, letter: Char) : Position =
+    Position(number, letter, full = true)
+fun position(number: Int, letter: Char) : Position =
+    Position(number, letter, full = false)

@@ -1,4 +1,4 @@
-package com.romulo.chess
+package com.romulo.chess.domain
 
 import org.junit.Assert
 import org.junit.Assert.*
@@ -44,7 +44,12 @@ class PositionTest {
     @Test
     fun testIsNotStraightBackward() {
         val pos = position(1, 'a')
-        assertFalse("2a is not straight backward to 1a", pos.isStraightBackward(position(2, 'a')))
+        assertFalse("2a is not straight backward to 1a", pos.isStraightBackward(
+            position(
+                2,
+                'a'
+            )
+        ))
     }
 
     @Test
