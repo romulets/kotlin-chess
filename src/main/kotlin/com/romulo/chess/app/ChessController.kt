@@ -4,7 +4,7 @@ import com.romulo.chess.domain.GameBoard
 import com.romulo.chess.domain.position
 import org.springframework.web.bind.annotation.*
 
-@RestController()
+@RestController
 class ChessController {
 
     @PostMapping("chess")
