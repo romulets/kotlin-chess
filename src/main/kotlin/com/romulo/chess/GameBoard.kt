@@ -8,25 +8,25 @@ class GameBoard {
     private val gameBoard : MutableList<Piece> = ArrayList()
 
     init {
-        gameBoard.add(Rook(WHITE, Position(1, 'a')))
-        gameBoard.add(Knight(WHITE, Position(1, 'b')))
-        gameBoard.add(Bishop(WHITE, Position(1, 'c')))
-        gameBoard.add(Queen(WHITE, Position(1, 'd')))
-        gameBoard.add(King(WHITE, Position(1, 'e')))
-        gameBoard.add(Bishop(WHITE, Position(1, 'f')))
-        gameBoard.add(Knight(WHITE, Position(1, 'g')))
-        gameBoard.add(Rook(WHITE, Position(1, 'h')))
+        gameBoard.add(Rook(WHITE, fullPosition(1, 'a')))
+        gameBoard.add(Knight(WHITE, fullPosition(1, 'b')))
+        gameBoard.add(Bishop(WHITE, fullPosition(1, 'c')))
+        gameBoard.add(Queen(WHITE, fullPosition(1, 'd')))
+        gameBoard.add(King(WHITE, fullPosition(1, 'e')))
+        gameBoard.add(Bishop(WHITE, fullPosition(1, 'f')))
+        gameBoard.add(Knight(WHITE, fullPosition(1, 'g')))
+        gameBoard.add(Rook(WHITE, fullPosition(1, 'h')))
         setUpPawns(2, WHITE)
 
         setUpPawns(7, BLACK)
-        gameBoard.add(Rook(BLACK, Position(8, 'a')))
-        gameBoard.add(Knight(BLACK, Position(8, 'b')))
-        gameBoard.add(Bishop(BLACK, Position(8, 'c')))
-        gameBoard.add(King(BLACK, Position(8, 'd')))
-        gameBoard.add(Queen(BLACK, Position(8, 'e')))
-        gameBoard.add(Bishop(BLACK, Position(8, 'f')))
-        gameBoard.add(Knight(BLACK, Position(8, 'g')))
-        gameBoard.add(Rook(BLACK, Position(8, 'h')))
+        gameBoard.add(Rook(BLACK, fullPosition(8, 'a')))
+        gameBoard.add(Knight(BLACK, fullPosition(8, 'b')))
+        gameBoard.add(Bishop(BLACK, fullPosition(8, 'c')))
+        gameBoard.add(King(BLACK, fullPosition(8, 'd')))
+        gameBoard.add(Queen(BLACK, fullPosition(8, 'e')))
+        gameBoard.add(Bishop(BLACK, fullPosition(8, 'f')))
+        gameBoard.add(Knight(BLACK, fullPosition(8, 'g')))
+        gameBoard.add(Rook(BLACK, fullPosition(8, 'h')))
     }
 
     private fun setUpPawns(number: Int, color: Color) {
@@ -35,8 +35,8 @@ class GameBoard {
         }
     }
 
-    fun pieceAt(number: Int, letter: Char): Piece? {
-        return gameBoard.filter { p -> p.position.isAt(number, letter) }.firstOrNull()
+    fun pieceAt(position: Position): Piece? {
+        return gameBoard.filter { p -> p.position.sameThat(position) }.firstOrNull()
     }
 
 }

@@ -7,7 +7,7 @@ class Knight(
     override val position: Position
 ) : Piece {
 
-    override fun canWalk(possiblePosition: Position): Boolean {
+    override fun canMove(possiblePosition: Position): Boolean {
         TODO("not implemented")
     }
 

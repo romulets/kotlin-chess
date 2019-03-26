@@ -1,22 +1,31 @@
 package com.romulo.chess
 
-data class Position(val number: Int, val letter: Char) {
+data class Position(
+    val number: Int,
+    val letter: Char,
+    val full: Boolean = false
+) {
+
     init {
         if (number !in 1..8 || letter.toInt() !in 97..105) {
             throw IllegalArgumentException("Invalid position")
         }
     }
 
-    fun isAt(number: Int, letter: Char) : Boolean = this.number.equals(number) && this.letter.equals(letter)
+    fun sameThat(other : Position) : Boolean = this.number == other.number && this.letter == other.letter
 
     fun isStraightForward(other: Position): Boolean = this.letter == other.letter && other.number > this.number
+
     fun isStraightBackward(other: Position): Boolean = this.letter == other.letter && other.number < this.number
 
-    fun distanceTo(other: Position): Int {
-        if (isStraightForward(other) || isStraightBackward(other)) {
-            return Math.abs(this.number - other.number)
-        }
+    private fun isDiagonal(other: Position) : Boolean = Math.abs(this.number - other.number) ==  Math.abs(this.letter.toInt() - other.letter.toInt())
 
-        return 0
-    }
+    fun isForwardDiagonal(other: Position): Boolean = isDiagonal(other) && other.number > this.number
+
+    fun isBackwardDiagonal(other: Position): Boolean =isDiagonal(other) && other.number < this.number
+
+    fun distanceTo(other: Position): Int = Math.abs(this.number - other.number)
 }
+
+fun fullPosition(number: Int, letter: Char) : Position = Position(number, letter, full = true)
+fun position(number: Int, letter: Char) : Position = Position(number, letter, full = false)
