@@ -8,11 +8,8 @@ class Bishop(
     override val position: Position
 ) : Piece {
 
-    override fun canMove(possiblePosition: Position): Boolean {
+    override fun moveTo(position: Position) : Boolean {
         TODO("not implemented")
     }
 
-    override fun move(position: Position) {
-        TODO("not implemented")
-    }
 }

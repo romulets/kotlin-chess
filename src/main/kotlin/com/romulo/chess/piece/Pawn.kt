@@ -9,7 +9,7 @@ class Pawn(
 
     private var walks = 0
 
-    override fun canMove(possiblePosition: Position): Boolean {
+    private fun canMoveTo(possiblePosition: Position): Boolean {
         return canWhiteWalk(possiblePosition) ||
                 canBlackWalk(possiblePosition) ||
                 canWhiteEat(possiblePosition) ||
@@ -42,9 +42,15 @@ class Pawn(
         return position.distanceTo(possiblePosition) == 2 && walks == 0
     }
 
-    override fun move(position: Position) {
+    override fun moveTo(position: Position) : Boolean {
+        if (!canMoveTo(position)) {
+            return false
+        }
+
         this.position = position
         walks++
+
+        return true
     }
 
 }

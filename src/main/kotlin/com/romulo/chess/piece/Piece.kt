@@ -6,7 +6,6 @@ interface Piece {
     val color: Color
     val position: Position
 
-    fun canMove(possiblePosition: Position) : Boolean
-    fun move(position: Position)
+    fun moveTo(position: Position) : Boolean
 
 }
