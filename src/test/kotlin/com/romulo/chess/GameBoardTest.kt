@@ -40,6 +40,32 @@ class GameBoardTest {
 
     }
 
+    @Test
+    fun testPlayChangePlayers() {
+        val gameBoard = GameBoard()
+
+        assertEquals(WHITE, gameBoard.player())
+
+        gameBoard.movePieceFromTo(position(2, 'a'), position(3, 'a'))
+
+        assertPieceIs(gameBoard, position(3, 'a'), Pawn::class, WHITE)
+        assertEquals(BLACK, gameBoard.player())
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun testPlayEmptySquare() {
+        val gameBoard = GameBoard()
+
+        gameBoard.movePieceFromTo(position(3, 'a'), position(3, 'a'))
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun testInvalidPlay() {
+        val gameBoard = GameBoard()
+
+        gameBoard.movePieceFromTo(position(2, 'a'), position(5, 'b'))
+    }
+
     private fun assertRowIsAllPawns(gameBoard: GameBoard, row : Int, color: Color) {
         for(i in 97..104) {
             assertPieceIs(gameBoard, fullPosition(row, i.toChar()), Pawn::class, color)

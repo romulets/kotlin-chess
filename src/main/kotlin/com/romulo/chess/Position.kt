@@ -25,6 +25,10 @@ data class Position(
     fun isBackwardDiagonal(other: Position): Boolean =isDiagonal(other) && other.number < this.number
 
     fun distanceTo(other: Position): Int = Math.abs(this.number - other.number)
+
+    fun fullPosition() : Position = fullPosition(number, letter)
+
+    fun emptyPosition() : Position = position(number, letter)
 }
 
 fun fullPosition(number: Int, letter: Char) : Position = Position(number, letter, full = true)

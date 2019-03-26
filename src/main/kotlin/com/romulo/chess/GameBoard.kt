@@ -1,11 +1,13 @@
 package com.romulo.chess
 
+import com.romulo.chess.Color.BLACK
+import com.romulo.chess.Color.WHITE
 import com.romulo.chess.piece.*
-import com.romulo.chess.Color.*
 
 class GameBoard {
 
-    private val gameBoard : MutableList<Piece> = ArrayList()
+    private var player: Color = WHITE
+    private val gameBoard: MutableList<Piece> = ArrayList()
 
     init {
         gameBoard.add(Rook(WHITE, fullPosition(1, 'a')))
@@ -35,8 +37,39 @@ class GameBoard {
         }
     }
 
+    fun player(): Color = this.player
+
     fun pieceAt(position: Position): Piece? {
         return gameBoard.filter { p -> p.position.sameThat(position) }.firstOrNull()
     }
+
+    fun movePieceFromTo(from: Position, to: Position) {
+        val piece = pieceAt(from) ?: throw IllegalArgumentException("Empty square")
+
+        val couldMove = piece.moveTo(fillPosition(to))
+
+        if (!couldMove) {
+            throw IllegalArgumentException("Invalid play")
+        }
+
+        changePlayers()
+    }
+
+    private fun changePlayers() {
+        player = if (player == WHITE) {
+            BLACK
+        } else {
+            WHITE
+        }
+    }
+
+    fun fillPosition(position: Position): Position {
+        if (pieceAt(position) != null) {
+            return position.fullPosition()
+        }
+
+        return position.emptyPosition()
+    }
+
 
 }
