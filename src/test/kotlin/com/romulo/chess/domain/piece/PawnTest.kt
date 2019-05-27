@@ -4,9 +4,9 @@ import com.romulo.chess.domain.Color
 import com.romulo.chess.domain.Position
 import com.romulo.chess.domain.position
 import com.romulo.chess.domain.fullPosition
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
-import org.junit.Test
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 
 class PawnTest {
 
@@ -16,7 +16,8 @@ class PawnTest {
             Color.WHITE,
             fullPosition(3, 'a')
         )
-        assertFalse("White pawn can not moveTo backward", pawn.moveTo(position(2, 'a')))
+        assertFalse(pawn.moveTo(position(2, 'a')), "White pawn can not moveTo backward")
+
     }
 
     @Test
@@ -25,7 +26,7 @@ class PawnTest {
             Color.WHITE,
             fullPosition(2, 'a')
         )
-        assertTrue("White pawn can first moveTo two squares", pawn.moveTo(position(4, 'a')))
+        assertTrue(pawn.moveTo(position(4, 'a')), "White pawn can first moveTo two squares")
     }
 
     @Test
@@ -34,7 +35,7 @@ class PawnTest {
             Color.WHITE,
             fullPosition(2, 'a')
         )
-        assertTrue("White pawn can first moveTo one square", pawn.moveTo(position(3, 'a')))
+        assertTrue(pawn.moveTo(position(3, 'a')), "White pawn can first moveTo one square")
     }
 
     @Test
@@ -44,7 +45,7 @@ class PawnTest {
             fullPosition(2, 'a')
         )
         pawn.moveTo(Position(3, 'a'))
-        assertTrue("White pawn can second moveTo one square", pawn.moveTo(position(4, 'a')))
+        assertTrue(pawn.moveTo(position(4, 'a')), "White pawn can second moveTo one square")
     }
 
     @Test
@@ -54,12 +55,7 @@ class PawnTest {
             fullPosition(2, 'a')
         )
         pawn.moveTo(Position(3, 'a'))
-        assertFalse("White pawn can not second moveTo two squares", pawn.moveTo(
-            position(
-                5,
-                'a'
-            )
-        ))
+        assertFalse(pawn.moveTo(position(5, 'a')), "White pawn can not second moveTo two squares")
     }
 
     @Test
@@ -68,7 +64,7 @@ class PawnTest {
             Color.WHITE,
             fullPosition(2, 'a')
         )
-        assertFalse("White pawn can not moveTo forward right", pawn.moveTo(position(3, 'b')))
+        assertFalse(pawn.moveTo(position(3, 'b')), "White pawn can not moveTo forward right")
     }
 
     @Test
@@ -77,7 +73,7 @@ class PawnTest {
             Color.WHITE,
             fullPosition(2, 'b')
         )
-        assertFalse("White pawn can not moveTo forward left", pawn.moveTo(position(3, 'a')))
+        assertFalse(pawn.moveTo(position(3, 'a')), "White pawn can not moveTo forward left")
     }
 
     @Test
@@ -86,7 +82,7 @@ class PawnTest {
             Color.WHITE,
             fullPosition(2, 'a')
         )
-        assertTrue("White pawn can not moveTo forward right", pawn.moveTo(fullPosition(3, 'b')))
+        assertTrue(pawn.moveTo(fullPosition(3, 'b')), "White pawn can not moveTo forward right")
     }
 
     @Test
@@ -95,7 +91,7 @@ class PawnTest {
             Color.WHITE,
             fullPosition(2, 'b')
         )
-        assertTrue("White pawn can not moveTo forward left", pawn.moveTo(fullPosition(3, 'a')))
+        assertTrue(pawn.moveTo(fullPosition(3, 'a')), "White pawn can not moveTo forward left")
     }
 
     @Test
@@ -104,7 +100,7 @@ class PawnTest {
             Color.WHITE,
             fullPosition(2, 'a')
         )
-        assertFalse("Pawn can not sidewalk", pawn.moveTo(position(2, 'b')))
+        assertFalse(pawn.moveTo(position(2, 'b')), "Pawn can not sidewalk")
     }
 
     @Test
@@ -113,7 +109,7 @@ class PawnTest {
             Color.BLACK,
             fullPosition(7, 'a')
         )
-        assertFalse("Black pawn can not moveTo forward", pawn.moveTo(position(8, 'a')))
+        assertFalse(pawn.moveTo(position(8, 'a')), "Black pawn can not moveTo forward")
     }
 
     @Test
@@ -122,7 +118,7 @@ class PawnTest {
             Color.BLACK,
             fullPosition(7, 'a')
         )
-        assertTrue("Black pawn can first moveTo two squares", pawn.moveTo(position(5, 'a')))
+        assertTrue(pawn.moveTo(position(5, 'a')), "Black pawn can first moveTo two squares")
     }
 
     @Test
@@ -131,7 +127,7 @@ class PawnTest {
             Color.BLACK,
             fullPosition(7, 'a')
         )
-        assertTrue("Black pawn can first moveTo one square", pawn.moveTo(position(6, 'a')))
+        assertTrue(pawn.moveTo(position(6, 'a')), "Black pawn can first moveTo one square")
     }
 
     @Test
@@ -141,7 +137,7 @@ class PawnTest {
             fullPosition(7, 'a')
         )
         pawn.moveTo(Position(6, 'a'))
-        assertTrue("White pawn can second moveTo one square", pawn.moveTo(position(5, 'a')))
+        assertTrue(pawn.moveTo(position(5, 'a')), "White pawn can second moveTo one square")
     }
 
     @Test
@@ -151,12 +147,7 @@ class PawnTest {
             fullPosition(7, 'a')
         )
         pawn.moveTo(Position(6, 'a'))
-        assertFalse("Black pawn can not second moveTo two squares", pawn.moveTo(
-            position(
-                4,
-                'a'
-            )
-        ))
+        assertFalse(pawn.moveTo(position(4, 'a')), "Black pawn can not second moveTo two squares")
     }
 
     @Test
@@ -165,7 +156,7 @@ class PawnTest {
             Color.BLACK,
             fullPosition(2, 'b')
         )
-        assertFalse("Black pawn can not moveTo backward right", pawn.moveTo(position(1, 'a')))
+        assertFalse(pawn.moveTo(position(1, 'a')), "Black pawn can not moveTo backward right")
     }
 
     @Test
@@ -174,7 +165,7 @@ class PawnTest {
             Color.BLACK,
             fullPosition(2, 'b')
         )
-        assertFalse("Black pawn can not moveTo backward left", pawn.moveTo(position(1, 'c')))
+        assertFalse(pawn.moveTo(position(1, 'c')), "Black pawn can not moveTo backward left")
     }
 
     @Test
@@ -183,7 +174,7 @@ class PawnTest {
             Color.BLACK,
             fullPosition(2, 'b')
         )
-        assertTrue("Black pawn can moveTo backward right", pawn.moveTo(fullPosition(1, 'a')))
+        assertTrue(pawn.moveTo(fullPosition(1, 'a')), "Black pawn can moveTo backward right")
     }
 
     @Test
@@ -192,6 +183,18 @@ class PawnTest {
             Color.BLACK,
             fullPosition(2, 'b')
         )
-        assertTrue("Black pawn can moveTo backward left", pawn.moveTo(fullPosition(1, 'c')))
+        assertTrue(pawn.moveTo(fullPosition(1, 'c')), "Black pawn can moveTo backward left")
     }
+
+//    @Test
+//    fun testPossiblePositionsForInitialPawn() {
+//        val pawn = Pawn(
+//            Color.BLACK,
+//            fullPosition(2, 'b')
+//        )
+//
+//        val possiblePostions = pawn.possiblePositions(emptyList<Piece>())
+//
+//        assertEquals(2, possiblePostions.size())
+//    }
 }

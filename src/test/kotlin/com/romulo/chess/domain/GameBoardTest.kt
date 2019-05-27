@@ -3,8 +3,8 @@ package com.romulo.chess.domain
 import com.romulo.chess.domain.Color.BLACK
 import com.romulo.chess.domain.Color.WHITE
 import com.romulo.chess.domain.piece.*
-import org.junit.Assert.*
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 import kotlin.reflect.KClass
 
 class GameBoardTest {
@@ -54,19 +54,22 @@ class GameBoardTest {
         assertEquals(BLACK, gameBoard.player)
     }
 
-    @Test(expected = IllegalArgumentException::class)
+    @Test
     fun testPlayEmptySquare() {
-        val gameBoard = GameBoard()
-
-        gameBoard.movePieceFromTo(position(3, 'a'), position(3, 'a'))
+        assertThrows(IllegalArgumentException::class.java, {
+            val gameBoard = GameBoard()
+            gameBoard.movePieceFromTo(position(3, 'a'), position(3, 'a'))
+        }, "Play in empty square")
     }
 
-    @Test(expected = IllegalArgumentException::class)
+    @Test
     fun testInvalidPlay() {
-        val gameBoard = GameBoard()
-
-        gameBoard.movePieceFromTo(position(2, 'a'), position(5, 'b'))
+        assertThrows(IllegalArgumentException::class.java, {
+            val gameBoard = GameBoard()
+            gameBoard.movePieceFromTo(position(2, 'a'), position(5, 'b'))
+        }, "InvalidPlay")
     }
+
 
     private fun assertRowIsAllPawns(gameBoard: GameBoard, row: Int, color: Color) {
         for (i in 97..104) {
@@ -86,8 +89,8 @@ class GameBoardTest {
     private fun assertPieceIs(gameBoard: GameBoard, position: Position, type: KClass<out Piece>, color: Color) {
         val piece = gameBoard.pieceAt(position)
         assertTrue(
-            "Piece should be " + type.simpleName + " and not " + piece?.javaClass?.kotlin,
-            type.isInstance(piece)
+            type.isInstance(piece),
+            "Piece should be " + type.simpleName + " and not " + piece?.javaClass?.kotlin
         )
         assertEquals(color, piece?.color)
     }
