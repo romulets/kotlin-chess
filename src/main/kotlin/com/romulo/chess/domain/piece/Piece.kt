@@ -10,5 +10,5 @@ interface Piece {
     val position: Position
 
     fun moveTo(position: Position) : Boolean
-
+    fun possiblePositions(pieceAt : (position : Position) -> Piece?): List<Position>
 }

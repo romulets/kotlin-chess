@@ -12,4 +12,7 @@ class Rook(
         TODO("not implemented")
     }
 
+    override fun possiblePositions(pieceAt : (position : Position) -> Piece?): List<Position> {
+        TODO("not implemented")
+    }
 }

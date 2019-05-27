@@ -186,15 +186,17 @@ class PawnTest {
         assertTrue(pawn.moveTo(fullPosition(1, 'c')), "Black pawn can moveTo backward left")
     }
 
-//    @Test
-//    fun testPossiblePositionsForInitialPawn() {
-//        val pawn = Pawn(
-//            Color.BLACK,
-//            fullPosition(2, 'b')
-//        )
-//
-//        val possiblePostions = pawn.possiblePositions(emptyList<Piece>())
-//
-//        assertEquals(2, possiblePostions.size())
-//    }
+    @Test
+    fun testPossiblePositionsForInitialPawn() {
+        val pawn = Pawn(
+            Color.BLACK,
+            fullPosition(2, 'b')
+        )
+
+        val possiblePositions : List<Position> = pawn.possiblePositions { null }
+
+        assertEquals(2, possiblePositions.size)
+        assertTrue(possiblePositions.contains(position(3, 'b')))
+        assertTrue(possiblePositions.contains(position(4, 'b')))
+    }
 }

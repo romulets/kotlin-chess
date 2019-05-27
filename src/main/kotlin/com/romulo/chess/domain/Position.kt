@@ -22,7 +22,7 @@ data class Position(
 
     fun isForwardDiagonal(other: Position): Boolean = isDiagonal(other) && other.number > this.number
 
-    fun isBackwardDiagonal(other: Position): Boolean =isDiagonal(other) && other.number < this.number
+    fun isBackwardDiagonal(other: Position): Boolean = isDiagonal(other) && other.number < this.number
 
     fun distanceTo(other: Position): Int = Math.abs(this.number - other.number)
 
