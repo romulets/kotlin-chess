@@ -187,9 +187,9 @@ class PawnTest {
     }
 
     @Test
-    fun testPossiblePositionsForInitialPawn() {
+    fun testPossiblePositionsForInitialWhitePawn() {
         val pawn = Pawn(
-            Color.BLACK,
+            Color.WHITE,
             fullPosition(2, 'b')
         )
 
@@ -198,5 +198,38 @@ class PawnTest {
         assertEquals(2, possiblePositions.size)
         assertTrue(possiblePositions.contains(position(3, 'b')))
         assertTrue(possiblePositions.contains(position(4, 'b')))
+    }
+
+    @Test
+    fun testPossiblePositionsForWhitePawn() {
+        val pawn = Pawn(
+            Color.WHITE,
+            fullPosition(2, 'b')
+        )
+
+        pawn.moveTo(position(4, 'b'))
+
+        val possiblePositions : List<Position> = pawn.possiblePositions { p ->
+            if (p.letter == 'a' || p.letter == 'c') Pawn(Color.WHITE, p.fullPosition()) else null
+        }
+
+        assertEquals(3, possiblePositions.size)
+        assertTrue(possiblePositions.contains(position(5, 'b')))
+        assertTrue(possiblePositions.contains(fullPosition(5, 'c')))
+        assertTrue(possiblePositions.contains(fullPosition(5, 'a')))
+    }
+
+    @Test
+    fun testPossiblePositionsForInitialBlackPawn() {
+        val pawn = Pawn(
+            Color.BLACK,
+            fullPosition(7, 'b')
+        )
+
+        val possiblePositions : List<Position> = pawn.possiblePositions { null }
+
+        assertEquals(2, possiblePositions.size)
+        assertTrue(possiblePositions.contains(position(6, 'b')))
+        assertTrue(possiblePositions.contains(position(5, 'b')))
     }
 }

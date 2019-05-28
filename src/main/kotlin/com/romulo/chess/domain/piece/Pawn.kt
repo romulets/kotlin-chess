@@ -59,27 +59,35 @@ class Pawn(
     override fun possiblePositions(pieceAt : (position : Position) -> Piece?): List<Position> {
         val possiblePositions = ArrayList<Position>()
 
-        val nextPosition = position(position.number + 1, position.letter)
+        val nextPosition = nextPosition(1, 0).emptyPosition()
         if (pieceAt(nextPosition) == null) {
             possiblePositions.add(nextPosition)
         }
 
-        val jumpPosition = position(position.number + 2, position.letter)
+        val jumpPosition = nextPosition(2, 0).emptyPosition()
         if (walks == 0 && pieceAt(jumpPosition) == null) {
             possiblePositions.add(jumpPosition)
         }
 
-        val eatRight = fullPosition(position.number + 1, position.letter + 1)
+        val eatRight = nextPosition(1, 1).fullPosition()
         if (pieceAt(eatRight) !== null) {
             possiblePositions.add(eatRight)
         }
 
-        val eatLeft = fullPosition(position.number + 1, position.letter - 1)
+        val eatLeft = nextPosition(1, -1).fullPosition()
         if (pieceAt(eatLeft) !== null) {
             possiblePositions.add(eatLeft)
         }
 
         return possiblePositions
+    }
+
+    private fun nextPosition(numbers : Int, letters: Int) : Position {
+        return if (color == Color.WHITE) {
+            position(position.number + numbers, position.letter + letters)
+        } else {
+            position(position.number - numbers, position.letter - letters)
+        }
     }
 
 }
