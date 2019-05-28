@@ -8,13 +8,13 @@ import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 
 @Document
-class GameBoard{
+class GameBoard {
 
     @Id
     lateinit var id: String
 
     var player: Color = WHITE
-    val pieces: MutableList<Piece> = ArrayList()
+    var pieces: MutableList<Piece> = ArrayList()
 
     init {
         pieces.add(Rook(WHITE, fullPosition(1, 'a')))
