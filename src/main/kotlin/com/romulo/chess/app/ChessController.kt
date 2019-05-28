@@ -1,29 +1,28 @@
 package com.romulo.chess.app
 
+import com.romulo.chess.domain.ChessService
 import com.romulo.chess.domain.GameBoard
+import com.romulo.chess.domain.Position
 import com.romulo.chess.domain.position
 import org.springframework.web.bind.annotation.*
 
 @RestController
-class ChessController {
+class ChessController(private val chessService: ChessService) {
 
     @PostMapping("chess")
-    fun newGame(): GameBoard = GameBoard()
+    fun newGame(): GameBoard = chessService.newGame()
 
-    @PutMapping("chess/from/{fromNumber}/{fromLetter}/to/{toNumber}/{toLetter}")
-    fun movePiece(
-        @RequestBody gameBoard: GameBoard,
-        @PathVariable("fromNumber") fromNumber: Int,
-        @PathVariable("fromLetter") fromLetter: Char,
-        @PathVariable("toNumber") toNumber: Int,
-        @PathVariable("toLetter") toLetter: Char
-    ): GameBoard {
-        gameBoard.movePieceFromTo(
-            position(fromNumber, fromLetter),
-            position(toNumber, toLetter)
-        )
+    @PutMapping("chess/{id}")
+    fun play(@PathVariable("id") id: String, @RequestBody play: Play): GameBoard {
+        return chessService.play(id, play.from, play.to)
+    }
 
-        return gameBoard
+    @GetMapping("chess/{id}/position/{number}/{letter}/possible-plays")
+    fun possiblePlays(
+        @PathVariable("id") id: String,
+        @PathVariable("number") number: Int,
+        @PathVariable("letter") letter: Char): List<Position> {
+        return chessService.possiblePlays(id, position(number, letter))
     }
 
 }

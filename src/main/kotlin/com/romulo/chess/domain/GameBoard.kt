@@ -3,8 +3,15 @@ package com.romulo.chess.domain
 import com.romulo.chess.domain.Color.BLACK
 import com.romulo.chess.domain.Color.WHITE
 import com.romulo.chess.domain.piece.*
+import org.bson.types.ObjectId
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.Document
 
-class GameBoard {
+@Document
+class GameBoard{
+
+    @Id
+    lateinit var id: String
 
     var player: Color = WHITE
     val pieces: MutableList<Piece> = ArrayList()
