@@ -70,6 +70,21 @@ class GameBoardTest {
         }, "InvalidPlay")
     }
 
+    @Test
+    fun testPossiblePlaysForEmptyPosition() {
+        assertThrows(IllegalArgumentException::class.java, {
+            val gameBoard = GameBoard()
+            gameBoard.possiblePlays(position(3, 'b'))
+        }, "InvalidPlay")
+    }
+
+    @Test
+    fun testPossiblePlaysForValidPosition() {
+        val gameBoard = GameBoard()
+        val possiblePlays = gameBoard.possiblePlays(position(2, 'b'))
+        assertEquals(2, possiblePlays.size)
+    }
+
 
     private fun assertRowIsAllPawns(gameBoard: GameBoard, row: Int, color: Color) {
         for (i in 97..104) {

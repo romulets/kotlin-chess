@@ -74,5 +74,15 @@ class GameBoard {
         return position.emptyPosition()
     }
 
+    fun possiblePlays(position: Position): List<Position> {
+        val piece = pieceAt(position)
+        if (piece != null) {
+            return piece.possiblePositions { possiblePosition ->
+                pieceAt(possiblePosition) != null
+            }
+        }
+
+        throw IllegalArgumentException("empty position")
+    }
 
 }
