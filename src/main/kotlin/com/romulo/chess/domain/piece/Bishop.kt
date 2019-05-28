@@ -13,7 +13,7 @@ class Bishop(
         TODO("not implemented")
     }
 
-    override fun possiblePositions(pieceAt : (position : Position) -> Piece?): List<Position> {
+    override fun possiblePositions(positionIsFull: (position: Position) -> Boolean): List<Position> {
         TODO("not implemented")
     }
 }

@@ -193,7 +193,7 @@ class PawnTest {
             fullPosition(2, 'b')
         )
 
-        val possiblePositions : List<Position> = pawn.possiblePositions { null }
+        val possiblePositions: List<Position> = pawn.possiblePositions { false }
 
         assertEquals(2, possiblePositions.size)
         assertTrue(possiblePositions.contains(position(3, 'b')))
@@ -209,8 +209,8 @@ class PawnTest {
 
         pawn.moveTo(position(4, 'b'))
 
-        val possiblePositions : List<Position> = pawn.possiblePositions { p ->
-            if (p.letter == 'a' || p.letter == 'c') Pawn(Color.WHITE, p.fullPosition()) else null
+        val possiblePositions: List<Position> = pawn.possiblePositions { p ->
+            p.letter == 'a' || p.letter == 'c'
         }
 
         assertEquals(3, possiblePositions.size)
@@ -226,7 +226,7 @@ class PawnTest {
             fullPosition(7, 'b')
         )
 
-        val possiblePositions : List<Position> = pawn.possiblePositions { null }
+        val possiblePositions: List<Position> = pawn.possiblePositions { false }
 
         assertEquals(2, possiblePositions.size)
         assertTrue(possiblePositions.contains(position(6, 'b')))

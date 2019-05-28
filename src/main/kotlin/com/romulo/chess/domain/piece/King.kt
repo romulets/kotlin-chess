@@ -7,7 +7,8 @@ class King(
     override val color: Color,
     override val position: Position
 ) : Piece {
-    override fun possiblePositions(pieceAt : (position : Position) -> Piece?): List<Position> {
+
+    override fun possiblePositions(positionIsFull: (position: Position) -> Boolean): List<Position> {
         TODO("not implemented")
     }
 
