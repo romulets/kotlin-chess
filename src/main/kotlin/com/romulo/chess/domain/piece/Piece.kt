@@ -17,6 +17,6 @@ interface Piece {
             return false
         }
 
-        return other.color == color
+        return other.color != color
     }
 }

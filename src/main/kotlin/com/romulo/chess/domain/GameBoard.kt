@@ -49,7 +49,7 @@ class GameBoard {
     }
 
     private fun setUpPawns(number: Int, color: Color) {
-        for (letter in MIN_POSITION_LETTER.until(MAX_POSITION_LETTER)) {
+        for (letter in MIN_POSITION_LETTER.rangeTo(MAX_POSITION_LETTER)) {
             pieces.add(
                 Pawn(
                     color,

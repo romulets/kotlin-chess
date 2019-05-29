@@ -37,13 +37,15 @@ class Pawn(
         }
 
         nextPosition(1, 1)?.let { position ->
-            if (pieceAt(position) != null && pieceAt(position)!!.color !== color){
+            val piece = pieceAt(position)
+            if (piece != null && isOpponentPiece(piece)) {
                 possiblePositions.add(position)
             }
         }
 
         nextPosition(1, -1)?.let { position ->
-            if (pieceAt(position) != null && pieceAt(position)!!.color !== color) {
+            val piece = pieceAt(position)
+            if (piece != null && isOpponentPiece(piece)) {
                 possiblePositions.add(position)
             }
         }

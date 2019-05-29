@@ -259,8 +259,4 @@ class PawnTest {
         assertTrue(possiblePositions.contains(Position(6, 'b')))
         assertTrue(possiblePositions.contains(Position(5, 'b')))
     }
-
-    private fun returnPawnIf(condition: (position: Position) -> Boolean, color: Color): (position: Position) -> Piece? {
-        return { p -> if (condition(p)) Pawn(color, p) else null }
-    }
 }

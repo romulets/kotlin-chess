@@ -13,7 +13,6 @@ class RookTest {
         val rook = Rook(Color.WHITE, Position(4, 'e'))
         val possiblePositions = rook.possiblePositions { null }
 
-        assertEquals(14, possiblePositions.size)
         assertTrue(possiblePositions.contains(Position(1, 'e')))
         assertTrue(possiblePositions.contains(Position(2, 'e')))
         assertTrue(possiblePositions.contains(Position(3, 'e')))
@@ -28,6 +27,51 @@ class RookTest {
         assertTrue(possiblePositions.contains(Position(4, 'f')))
         assertTrue(possiblePositions.contains(Position(4, 'g')))
         assertTrue(possiblePositions.contains(Position(4, 'h')))
+        assertEquals(14, possiblePositions.size)
+    }
+
+    @Test
+    fun testEatPosition() {
+        val rook = Rook(Color.WHITE, Position(4, 'e'))
+
+        val otherPieces = listOf(
+            Position(2, 'e'),
+            Position(4, 'c'),
+            Position(6, 'e'),
+            Position(4, 'g')
+        )
+
+        val possiblePositions = rook.possiblePositions(returnPawnIf(otherPieces::contains, Color.BLACK))
+
+        assertTrue(possiblePositions.contains(Position(2, 'e')))
+        assertTrue(possiblePositions.contains(Position(3, 'e')))
+        assertTrue(possiblePositions.contains(Position(5, 'e')))
+        assertTrue(possiblePositions.contains(Position(6, 'e')))
+        assertTrue(possiblePositions.contains(Position(4, 'c')))
+        assertTrue(possiblePositions.contains(Position(4, 'd')))
+        assertTrue(possiblePositions.contains(Position(4, 'f')))
+        assertTrue(possiblePositions.contains(Position(4, 'g')))
+        assertEquals(8, possiblePositions.size)
+    }
+
+    @Test
+    fun testFriendsPosition() {
+        val rook = Rook(Color.WHITE, Position(4, 'e'))
+
+        val otherPieces = listOf(
+            Position(2, 'e'),
+            Position(4, 'c'),
+            Position(6, 'e'),
+            Position(4, 'g')
+        )
+
+        val possiblePositions = rook.possiblePositions(returnPawnIf(otherPieces::contains, Color.WHITE))
+
+        assertTrue(possiblePositions.contains(Position(3, 'e')))
+        assertTrue(possiblePositions.contains(Position(5, 'e')))
+        assertTrue(possiblePositions.contains(Position(4, 'd')))
+        assertTrue(possiblePositions.contains(Position(4, 'f')))
+        assertEquals(4, possiblePositions.size)
     }
 
 }
