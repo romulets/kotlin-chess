@@ -40,7 +40,7 @@ class RookTest {
             Position(4, 'g')
         )
 
-        val possiblePositions = rook.possiblePositions(returnPawnIf(otherPieces::contains, Color.BLACK))
+        val possiblePositions = rook.possiblePositions(returnPieceIf(otherPieces::contains, Color.BLACK))
 
         assertTrue(possiblePositions.contains(Position(2, 'e')))
         assertTrue(possiblePositions.contains(Position(3, 'e')))
@@ -64,7 +64,7 @@ class RookTest {
             Position(4, 'g')
         )
 
-        val possiblePositions = rook.possiblePositions(returnPawnIf(otherPieces::contains, Color.WHITE))
+        val possiblePositions = rook.possiblePositions(returnPieceIf(otherPieces::contains, Color.WHITE))
 
         assertTrue(possiblePositions.contains(Position(3, 'e')))
         assertTrue(possiblePositions.contains(Position(5, 'e')))
@@ -112,7 +112,7 @@ class RookTest {
     fun testEat() {
         val rook = Rook(Color.WHITE, Position(4, 'e'))
         val to = Position(3, 'e')
-        assertTrue(rook.moveTo(to, returnPawnIf(to::sameThat, Color.BLACK)))
+        assertTrue(rook.moveTo(to, returnPieceIf(to::sameThat, Color.BLACK)))
         assertEquals(rook.position, to)
     }
 
@@ -120,7 +120,7 @@ class RookTest {
     fun testNotEatFriend() {
         val rook = Rook(Color.WHITE, Position(4, 'e'))
         val to = Position(3, 'e')
-        assertFalse(rook.moveTo(to, returnPawnIf(to::sameThat, Color.WHITE)))
+        assertFalse(rook.moveTo(to, returnPieceIf(to::sameThat, Color.WHITE)))
         assertEquals(rook.position, Position(4, 'e'))
     }
 

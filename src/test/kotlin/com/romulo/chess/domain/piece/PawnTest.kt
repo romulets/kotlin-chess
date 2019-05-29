@@ -1,6 +1,5 @@
 package com.romulo.chess.domain.piece
 
-import com.romulo.chess.domain.Color
 import com.romulo.chess.domain.Color.*
 import com.romulo.chess.domain.Position
 import org.junit.jupiter.api.Assertions.*
@@ -82,7 +81,7 @@ class PawnTest {
         )
 
         val to = Position(3, 'b')
-        assertTrue(pawn.moveTo(to, returnPawnIf(to::sameThat, BLACK)), "White pawn can moveTo forward right")
+        assertTrue(pawn.moveTo(to, returnPieceIf(to::sameThat, BLACK)), "White pawn can moveTo forward right")
     }
 
     @Test
@@ -93,7 +92,7 @@ class PawnTest {
         )
 
         val to = Position(3, 'b')
-        assertFalse(pawn.moveTo(to, returnPawnIf(to::sameThat, WHITE)), "White pawn can not moveTo forward right")
+        assertFalse(pawn.moveTo(to, returnPieceIf(to::sameThat, WHITE)), "White pawn can not moveTo forward right")
     }
 
     @Test
@@ -104,7 +103,7 @@ class PawnTest {
         )
 
         val to = Position(3, 'a')
-        assertTrue(pawn.moveTo(to, returnPawnIf(to::sameThat, BLACK)), "White pawn can not moveTo forward left")
+        assertTrue(pawn.moveTo(to, returnPieceIf(to::sameThat, BLACK)), "White pawn can not moveTo forward left")
     }
 
     @Test
@@ -189,7 +188,7 @@ class PawnTest {
         )
 
         val to = Position(1, 'a')
-        assertFalse(pawn.moveTo(to, returnPawnIf(to::sameThat, BLACK)), "Black pawn cannot moveTo backward black right")
+        assertFalse(pawn.moveTo(to, returnPieceIf(to::sameThat, BLACK)), "Black pawn cannot moveTo backward black right")
     }
 
     @Test
@@ -200,7 +199,7 @@ class PawnTest {
         )
 
         val to = Position(1, 'a')
-        assertTrue(pawn.moveTo(to, returnPawnIf(to::sameThat, WHITE)), "Black pawn can moveTo backward right")
+        assertTrue(pawn.moveTo(to, returnPieceIf(to::sameThat, WHITE)), "Black pawn can moveTo backward right")
     }
 
     @Test
@@ -210,7 +209,7 @@ class PawnTest {
             Position(2, 'b')
         )
         val to = Position(1, 'c')
-        assertTrue(pawn.moveTo(to, returnPawnIf(to::sameThat, WHITE)), "Black pawn can moveTo backward left")
+        assertTrue(pawn.moveTo(to, returnPieceIf(to::sameThat, WHITE)), "Black pawn can moveTo backward left")
     }
 
     @Test
@@ -237,7 +236,7 @@ class PawnTest {
         pawn.moveTo(Position(4, 'b'))
 
         val possiblePositions: List<Position> = pawn.possiblePositions(
-            returnPawnIf({ p -> p.letter == 'a' || p.letter == 'c' }, BLACK)
+            returnPieceIf({ p -> p.letter == 'a' || p.letter == 'c' }, BLACK)
         )
 
         assertEquals(3, possiblePositions.size)
