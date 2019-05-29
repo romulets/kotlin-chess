@@ -2,8 +2,7 @@ package com.romulo.chess.domain
 
 data class Position(
     val number: Int,
-    val letter: Char,
-    val full: Boolean = false
+    val letter: Char
 ) {
 
     init {
@@ -12,30 +11,28 @@ data class Position(
         }
     }
 
+    fun add(number: Int, letter: Int): Position? {
+        val newNumber = this.number + number
+        val newLetter = this.letter.plus(letter)
+
+        if (!validPosition(newNumber, newLetter)) {
+            return null
+        }
+
+        return Position(newNumber, newLetter)
+    }
+
+    fun addNumber(number: Int): Position? = add(number, 0)
+
     fun sameThat(other: Position): Boolean = this.number == other.number && this.letter == other.letter
-
-    fun isStraightForward(other: Position): Boolean = this.letter == other.letter && other.number > this.number
-
-    fun isStraightBackward(other: Position): Boolean = this.letter == other.letter && other.number < this.number
-
-    private fun isDiagonal(other: Position): Boolean =
-        Math.abs(this.number - other.number) == Math.abs(this.letter.toInt() - other.letter.toInt())
-
-    fun isForwardDiagonal(other: Position): Boolean = isDiagonal(other) && other.number > this.number
-
-    fun isBackwardDiagonal(other: Position): Boolean = isDiagonal(other) && other.number < this.number
-
-    fun distanceTo(other: Position): Int = Math.abs(this.number - other.number)
-
-    fun fullPosition(): Position = fullPosition(number, letter)
-
-    fun emptyPosition(): Position = position(number, letter)
 }
 
-fun fullPosition(number: Int, letter: Char): Position =
-    Position(number, letter, full = true)
+const val MIN_POSITION_NUMBER: Int = 1
+const val MAX_POSITION_NUMBER: Int = 8
+const val MIN_POSITION_LETTER: Int = 97
+const val MAX_POSITION_LETTER: Int = 105
 
-fun position(number: Int, letter: Char): Position =
-    Position(number, letter, full = false)
-
-fun validPosition(number: Int, letter: Char): Boolean = number in 1..8 && letter.toInt() in 97..105
+fun validPosition(number: Int, letter: Char): Boolean {
+    return number in MIN_POSITION_NUMBER..MAX_POSITION_NUMBER
+            && letter.toInt() in MIN_POSITION_LETTER..MAX_POSITION_LETTER
+}

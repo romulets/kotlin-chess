@@ -9,15 +9,13 @@ class Pawn(
 
     private var walks = 0
 
-    private fun canMoveTo(position: Position): Boolean {
-        val possiblePositions = possiblePositions { possiblePosition: Position ->
-            if (position.sameThat(possiblePosition)) position.full else false
-        }
+    private fun canMoveTo(position: Position, pieceAt: (position: Position) -> Piece?): Boolean {
+        val possiblePositions = possiblePositions(pieceAt)
         return possiblePositions.contains(position)
     }
 
-    override fun moveTo(position: Position): Boolean {
-        if (!canMoveTo(position)) {
+    override fun moveTo(position: Position, pieceAt: (position: Position) -> Piece?): Boolean {
+        if (!canMoveTo(position, pieceAt)) {
             return false
         }
 
@@ -27,44 +25,37 @@ class Pawn(
         return true
     }
 
-    override fun possiblePositions(positionIsFull: (position: Position) -> Boolean): List<Position> {
+    override fun possiblePositions(pieceAt: (position: Position) -> Piece?): List<Position> {
         val possiblePositions = ArrayList<Position>()
 
         nextPosition(1, 0)?.let { position ->
-            if (!positionIsFull(position)) possiblePositions.add(position.emptyPosition())
+            if (pieceAt(position) == null) possiblePositions.add(position)
         }
 
         nextPosition(2, 0)?.let { position ->
-            if (walks == 0 && !positionIsFull(position)) possiblePositions.add(position.emptyPosition())
+            if (walks == 0 && pieceAt(position) == null) possiblePositions.add(position)
         }
 
         nextPosition(1, 1)?.let { position ->
-            if (positionIsFull(position)) possiblePositions.add(position.fullPosition())
+            if (pieceAt(position) != null && pieceAt(position)!!.color !== color){
+                possiblePositions.add(position)
+            }
         }
 
         nextPosition(1, -1)?.let { position ->
-            if (positionIsFull(position)) possiblePositions.add(position.fullPosition())
+            if (pieceAt(position) != null && pieceAt(position)!!.color !== color) {
+                possiblePositions.add(position)
+            }
         }
 
         return possiblePositions
     }
 
     private fun nextPosition(numbers: Int, letters: Int): Position? {
-        val nextNumber: Int
-        val nextLetter: Char
-
-        if (color == Color.WHITE) {
-            nextNumber = position.number + numbers
-            nextLetter = position.letter.plus(letters)
+        return if (color == Color.WHITE) {
+            position.add(numbers, letters)
         } else {
-            nextNumber = position.number - numbers
-            nextLetter = position.letter.minus(letters)
-        }
-
-        return if (validPosition(nextNumber, nextLetter)) {
-            position(nextNumber, nextLetter)
-        } else {
-            null
+            position.add(-numbers, -letters)
         }
     }
 

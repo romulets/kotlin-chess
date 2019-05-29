@@ -13,14 +13,17 @@ class GameBoardTest {
     fun testInitialState() {
         val gameBoard = GameBoard()
 
-        assertPieceIs(gameBoard, position(1, 'a'), Rook::class, WHITE)
-        assertPieceIs(gameBoard, position(1, 'b'), Knight::class, WHITE)
-        assertPieceIs(gameBoard, position(1, 'c'), Bishop::class, WHITE)
-        assertPieceIs(gameBoard, position(1, 'd'), Queen::class, WHITE)
-        assertPieceIs(gameBoard, position(1, 'e'), King::class, WHITE)
-        assertPieceIs(gameBoard, position(1, 'f'), Bishop::class, WHITE)
-        assertPieceIs(gameBoard, position(1, 'g'), Knight::class, WHITE)
-        assertPieceIs(gameBoard, position(1, 'h'), Rook::class, WHITE)
+        assertEquals(32, gameBoard.pieces.size)
+        assertEquals(0, gameBoard.eatenPieces.size)
+
+        assertPieceIs(gameBoard, Position(1, 'a'), Rook::class, WHITE)
+        assertPieceIs(gameBoard, Position(1, 'b'), Knight::class, WHITE)
+        assertPieceIs(gameBoard, Position(1, 'c'), Bishop::class, WHITE)
+        assertPieceIs(gameBoard, Position(1, 'd'), Queen::class, WHITE)
+        assertPieceIs(gameBoard, Position(1, 'e'), King::class, WHITE)
+        assertPieceIs(gameBoard, Position(1, 'f'), Bishop::class, WHITE)
+        assertPieceIs(gameBoard, Position(1, 'g'), Knight::class, WHITE)
+        assertPieceIs(gameBoard, Position(1, 'h'), Rook::class, WHITE)
         assertRowIsAllPawns(gameBoard, 2, WHITE)
 
         assertRowIsAllNull(gameBoard, 3)
@@ -29,14 +32,14 @@ class GameBoardTest {
         assertRowIsAllNull(gameBoard, 6)
 
         assertRowIsAllPawns(gameBoard, 7, BLACK)
-        assertPieceIs(gameBoard, position(8, 'a'), Rook::class, BLACK)
-        assertPieceIs(gameBoard, position(8, 'b'), Knight::class, BLACK)
-        assertPieceIs(gameBoard, position(8, 'c'), Bishop::class, BLACK)
-        assertPieceIs(gameBoard, position(8, 'd'), Queen::class, BLACK)
-        assertPieceIs(gameBoard, position(8, 'e'), King::class, BLACK)
-        assertPieceIs(gameBoard, position(8, 'f'), Bishop::class, BLACK)
-        assertPieceIs(gameBoard, position(8, 'g'), Knight::class, BLACK)
-        assertPieceIs(gameBoard, position(8, 'h'), Rook::class, BLACK)
+        assertPieceIs(gameBoard, Position(8, 'a'), Rook::class, BLACK)
+        assertPieceIs(gameBoard, Position(8, 'b'), Knight::class, BLACK)
+        assertPieceIs(gameBoard, Position(8, 'c'), Bishop::class, BLACK)
+        assertPieceIs(gameBoard, Position(8, 'd'), Queen::class, BLACK)
+        assertPieceIs(gameBoard, Position(8, 'e'), King::class, BLACK)
+        assertPieceIs(gameBoard, Position(8, 'f'), Bishop::class, BLACK)
+        assertPieceIs(gameBoard, Position(8, 'g'), Knight::class, BLACK)
+        assertPieceIs(gameBoard, Position(8, 'h'), Rook::class, BLACK)
     }
 
     @Test
@@ -45,11 +48,11 @@ class GameBoardTest {
 
         assertEquals(WHITE, gameBoard.player)
 
-        gameBoard.play(position(2, 'a'), position(3, 'a'))
+        gameBoard.play(Position(2, 'a'), Position(3, 'a'))
 
         assertPieceIs(
             gameBoard,
-            position(3, 'a'), Pawn::class, WHITE
+            Position(3, 'a'), Pawn::class, WHITE
         )
         assertEquals(BLACK, gameBoard.player)
     }
@@ -58,7 +61,7 @@ class GameBoardTest {
     fun testPlayEmptySquare() {
         assertThrows(IllegalArgumentException::class.java, {
             val gameBoard = GameBoard()
-            gameBoard.play(position(3, 'a'), position(3, 'a'))
+            gameBoard.play(Position(3, 'a'), Position(3, 'a'))
         }, "Play in empty square")
     }
 
@@ -66,7 +69,7 @@ class GameBoardTest {
     fun testInvalidPlay() {
         assertThrows(IllegalArgumentException::class.java, {
             val gameBoard = GameBoard()
-            gameBoard.play(position(2, 'a'), position(5, 'b'))
+            gameBoard.play(Position(2, 'a'), Position(5, 'b'))
         }, "InvalidPlay")
     }
 
@@ -74,47 +77,47 @@ class GameBoardTest {
     fun testPossiblePlaysForEmptyPosition() {
         assertThrows(IllegalArgumentException::class.java, {
             val gameBoard = GameBoard()
-            gameBoard.possiblePlays(position(3, 'b'))
+            gameBoard.possiblePlays(Position(3, 'b'))
         }, "InvalidPlay")
     }
 
     @Test
     fun testPossiblePlaysForValidPosition() {
         val gameBoard = GameBoard()
-        val possiblePlays = gameBoard.possiblePlays(position(2, 'b'))
+        val possiblePlays = gameBoard.possiblePlays(Position(2, 'b'))
         assertEquals(2, possiblePlays.size)
     }
 
     @Test
     fun testEatScenario() {
         val board = GameBoard()
-        board.play(position(2, 'e'), position(4, 'e'))
-        board.play(position(7, 'f'), position(5, 'f'))
-        board.play(position(4, 'e'), position(5, 'f'))
+        board.play(Position(2, 'e'), Position(4, 'e'))
+        board.play(Position(7, 'f'), Position(5, 'f'))
+        board.play(Position(4, 'e'), Position(5, 'f'))
 
         assertEquals(31, board.pieces.size)
         assertEquals(1, board.eatenPieces.size)
 
-        assertPieceIs(board, position(5, 'f'), Pawn::class, WHITE)
+        assertPieceIs(board, Position(5, 'f'), Pawn::class, WHITE)
     }
 
     private fun assertRowIsAllPawns(gameBoard: GameBoard, row: Int, color: Color) {
         for (i in 97..104) {
             assertPieceIs(
                 gameBoard,
-                fullPosition(row, i.toChar()), Pawn::class, color
+                Position(row, i.toChar()), Pawn::class, color
             )
         }
     }
 
     private fun assertRowIsAllNull(gameBoard: GameBoard, row: Int) {
         for (i in 97..104) {
-            assertNull(gameBoard.pieceAt(position(row, i.toChar())))
+            assertNull(gameBoard.pieceAt(Position(row, i.toChar())))
         }
     }
 
-    private fun assertPieceIs(gameBoard: GameBoard, position: Position, type: KClass<out Piece>, color: Color) {
-        val piece = gameBoard.pieceAt(position)
+    private fun assertPieceIs(gameBoard: GameBoard, Position: Position, type: KClass<out Piece>, color: Color) {
+        val piece = gameBoard.pieceAt(Position)
         assertTrue(
             type.isInstance(piece),
             "Piece should be " + type.simpleName + " and not " + piece?.javaClass?.kotlin

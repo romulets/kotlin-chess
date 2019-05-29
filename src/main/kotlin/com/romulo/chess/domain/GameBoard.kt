@@ -18,29 +18,29 @@ class GameBoard {
     var eatenPieces: MutableList<Piece> = ArrayList()
 
     init {
-        pieces.add(Rook(WHITE, fullPosition(1, 'a')))
-        pieces.add(Knight(WHITE, fullPosition(1, 'b')))
-        pieces.add(Bishop(WHITE, fullPosition(1, 'c')))
-        pieces.add(Queen(WHITE, fullPosition(1, 'd')))
-        pieces.add(King(WHITE, fullPosition(1, 'e')))
-        pieces.add(Bishop(WHITE, fullPosition(1, 'f')))
-        pieces.add(Knight(WHITE, fullPosition(1, 'g')))
-        pieces.add(Rook(WHITE, fullPosition(1, 'h')))
+        pieces.add(Rook(WHITE, Position(1, 'a')))
+        pieces.add(Knight(WHITE, Position(1, 'b')))
+        pieces.add(Bishop(WHITE, Position(1, 'c')))
+        pieces.add(Queen(WHITE, Position(1, 'd')))
+        pieces.add(King(WHITE, Position(1, 'e')))
+        pieces.add(Bishop(WHITE, Position(1, 'f')))
+        pieces.add(Knight(WHITE, Position(1, 'g')))
+        pieces.add(Rook(WHITE, Position(1, 'h')))
         setUpPawns(2, WHITE)
 
         setUpPawns(7, BLACK)
-        pieces.add(Rook(BLACK, fullPosition(8, 'a')))
-        pieces.add(Knight(BLACK, fullPosition(8, 'b')))
-        pieces.add(Bishop(BLACK, fullPosition(8, 'c')))
-        pieces.add(Queen(BLACK, fullPosition(8, 'd')))
-        pieces.add(King(BLACK, fullPosition(8, 'e')))
-        pieces.add(Bishop(BLACK, fullPosition(8, 'f')))
-        pieces.add(Knight(BLACK, fullPosition(8, 'g')))
-        pieces.add(Rook(BLACK, fullPosition(8, 'h')))
+        pieces.add(Rook(BLACK, Position(8, 'a')))
+        pieces.add(Knight(BLACK, Position(8, 'b')))
+        pieces.add(Bishop(BLACK, Position(8, 'c')))
+        pieces.add(Queen(BLACK, Position(8, 'd')))
+        pieces.add(King(BLACK, Position(8, 'e')))
+        pieces.add(Bishop(BLACK, Position(8, 'f')))
+        pieces.add(Knight(BLACK, Position(8, 'g')))
+        pieces.add(Rook(BLACK, Position(8, 'h')))
     }
 
     private fun setUpPawns(number: Int, color: Color) {
-        for (letter in 97..104) {
+        for (letter in MIN_POSITION_LETTER.until(MAX_POSITION_LETTER)) {
             pieces.add(
                 Pawn(
                     color,
@@ -58,7 +58,7 @@ class GameBoard {
         val piece = pieceAt(from) ?: throw IllegalArgumentException("Empty square")
         val eatenPiece = pieceAt(to)
 
-        val couldMove = piece.moveTo(fillPosition(to))
+        val couldMove = piece.moveTo(to, this::pieceAt)
 
         if (!couldMove) {
             throw IllegalArgumentException("Invalid play")
@@ -80,20 +80,10 @@ class GameBoard {
         }
     }
 
-    private fun fillPosition(position: Position): Position {
-        if (pieceAt(position) != null) {
-            return position.fullPosition()
-        }
-
-        return position.emptyPosition()
-    }
-
     fun possiblePlays(position: Position): List<Position> {
         val piece = pieceAt(position)
         if (piece != null) {
-            return piece.possiblePositions { possiblePosition ->
-                pieceAt(possiblePosition) != null
-            }
+            return piece.possiblePositions(this::pieceAt)
         }
 
         throw IllegalArgumentException("empty position")
