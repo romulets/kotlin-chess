@@ -6,7 +6,6 @@ import com.romulo.chess.domain.MAX_POSITION_NUMBER
 import com.romulo.chess.domain.MIN_POSITION_LETTER
 import com.romulo.chess.domain.MIN_POSITION_NUMBER
 import com.romulo.chess.domain.Position
-import com.romulo.chess.domain.nullablePosition
 
 class Rook(
     override val color: Color,
