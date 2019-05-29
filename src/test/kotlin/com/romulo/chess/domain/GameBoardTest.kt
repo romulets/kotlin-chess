@@ -45,7 +45,7 @@ class GameBoardTest {
 
         assertEquals(WHITE, gameBoard.player)
 
-        gameBoard.movePieceFromTo(position(2, 'a'), position(3, 'a'))
+        gameBoard.play(position(2, 'a'), position(3, 'a'))
 
         assertPieceIs(
             gameBoard,
@@ -58,7 +58,7 @@ class GameBoardTest {
     fun testPlayEmptySquare() {
         assertThrows(IllegalArgumentException::class.java, {
             val gameBoard = GameBoard()
-            gameBoard.movePieceFromTo(position(3, 'a'), position(3, 'a'))
+            gameBoard.play(position(3, 'a'), position(3, 'a'))
         }, "Play in empty square")
     }
 
@@ -66,7 +66,7 @@ class GameBoardTest {
     fun testInvalidPlay() {
         assertThrows(IllegalArgumentException::class.java, {
             val gameBoard = GameBoard()
-            gameBoard.movePieceFromTo(position(2, 'a'), position(5, 'b'))
+            gameBoard.play(position(2, 'a'), position(5, 'b'))
         }, "InvalidPlay")
     }
 
@@ -85,6 +85,18 @@ class GameBoardTest {
         assertEquals(2, possiblePlays.size)
     }
 
+    @Test
+    fun testEatScenario() {
+        val board = GameBoard()
+        board.play(position(2, 'e'), position(4, 'e'))
+        board.play(position(7, 'f'), position(5, 'f'))
+        board.play(position(4, 'e'), position(5, 'f'))
+
+        assertEquals(31, board.pieces.size)
+        assertEquals(1, board.eatenPieces.size)
+
+        assertPieceIs(board, position(5, 'f'), Pawn::class, WHITE)
+    }
 
     private fun assertRowIsAllPawns(gameBoard: GameBoard, row: Int, color: Color) {
         for (i in 97..104) {

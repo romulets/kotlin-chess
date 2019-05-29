@@ -15,7 +15,7 @@ class ChessService(
 
     fun play(gameId: String, from: Position, to: Position): GameBoard {
         val gameBoard = gameBoardRepository.findById(gameId).orElseThrow()
-        gameBoard.movePieceFromTo(from, to)
+        gameBoard.play(from, to)
         gameBoardRepository.save(gameBoard)
         return gameBoard
     }

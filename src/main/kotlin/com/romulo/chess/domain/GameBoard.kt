@@ -15,6 +15,7 @@ class GameBoard {
 
     var player: Color = WHITE
     var pieces: MutableList<Piece> = ArrayList()
+    var eatenPieces: MutableList<Piece> = ArrayList()
 
     init {
         pieces.add(Rook(WHITE, fullPosition(1, 'a')))
@@ -53,13 +54,19 @@ class GameBoard {
         return pieces.firstOrNull { p -> p.position.sameThat(position) }
     }
 
-    fun movePieceFromTo(from: Position, to: Position) {
+    fun play(from: Position, to: Position) {
         val piece = pieceAt(from) ?: throw IllegalArgumentException("Empty square")
+        val eatenPiece = pieceAt(to)
 
         val couldMove = piece.moveTo(fillPosition(to))
 
         if (!couldMove) {
             throw IllegalArgumentException("Invalid play")
+        }
+
+        eatenPiece?.let {
+            pieces.remove(eatenPiece)
+            eatenPieces.add(eatenPiece)
         }
 
         changePlayers()
