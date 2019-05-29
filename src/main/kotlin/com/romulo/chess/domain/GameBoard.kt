@@ -2,8 +2,13 @@ package com.romulo.chess.domain
 
 import com.romulo.chess.domain.Color.BLACK
 import com.romulo.chess.domain.Color.WHITE
-import com.romulo.chess.domain.piece.*
-import org.bson.types.ObjectId
+import com.romulo.chess.domain.piece.Bishop
+import com.romulo.chess.domain.piece.King
+import com.romulo.chess.domain.piece.Knight
+import com.romulo.chess.domain.piece.Pawn
+import com.romulo.chess.domain.piece.Piece
+import com.romulo.chess.domain.piece.Queen
+import com.romulo.chess.domain.piece.Rook
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.LastModifiedDate

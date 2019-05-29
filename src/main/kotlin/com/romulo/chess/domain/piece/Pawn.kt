@@ -1,6 +1,7 @@
 package com.romulo.chess.domain.piece
 
-import com.romulo.chess.domain.*
+import com.romulo.chess.domain.Color
+import com.romulo.chess.domain.Position
 
 class Pawn(
     override val color: Color,

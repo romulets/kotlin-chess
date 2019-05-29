@@ -3,7 +3,12 @@ package com.romulo.chess.app
 import com.romulo.chess.domain.ChessService
 import com.romulo.chess.domain.GameBoard
 import com.romulo.chess.domain.Position
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class ChessController(private val chessService: ChessService) {
@@ -20,7 +25,8 @@ class ChessController(private val chessService: ChessService) {
     fun possiblePlays(
         @PathVariable("id") id: String,
         @PathVariable("number") number: Int,
-        @PathVariable("letter") letter: Char): List<Position> {
+        @PathVariable("letter") letter: Char
+    ): List<Position> {
         return chessService.possiblePlays(id, Position(number, letter))
     }
 
