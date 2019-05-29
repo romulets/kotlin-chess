@@ -11,6 +11,6 @@ fun returnPieceIf(condition: (position: Position) -> Boolean, color: Color): (po
 fun assertPossiblePositionContains(possiblePositions: List<Position>, number: Int, letter: Char) {
     Assertions.assertTrue(
         possiblePositions.contains(Position(number, letter)),
-        "Position %d %c is not possible".format(number, letter)
+        "Position %d%c is not possible".format(number, letter)
     )
 }

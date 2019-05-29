@@ -1,6 +1,10 @@
 package com.romulo.chess.domain.piece
 
 import com.romulo.chess.domain.Color
+import com.romulo.chess.domain.MAX_POSITION_LETTER
+import com.romulo.chess.domain.MAX_POSITION_NUMBER
+import com.romulo.chess.domain.MIN_POSITION_LETTER
+import com.romulo.chess.domain.MIN_POSITION_NUMBER
 import com.romulo.chess.domain.Position
 import com.romulo.chess.domain.nullablePosition
 
@@ -15,6 +19,40 @@ class Bishop(
     }
 
     override fun possiblePositions(pieceAt: (position: Position) -> Piece?): List<Position> {
-        TODO("not implemented")
+        val possiblePositions = ArrayList<Position>()
+
+        possiblePositions.addAll(
+            possibleSequentialPositions(
+                position.number.dec().downTo(MIN_POSITION_NUMBER)
+                    .zip(position.letter.inc().rangeTo(MAX_POSITION_LETTER)),
+                pieceAt
+            )
+        )
+
+        possiblePositions.addAll(
+            possibleSequentialPositions(
+                position.number.inc().rangeTo(MAX_POSITION_NUMBER)
+                    .zip(position.letter.dec().downTo(MIN_POSITION_LETTER)),
+                pieceAt
+            )
+        )
+
+        possiblePositions.addAll(
+            possibleSequentialPositions(
+                position.number.inc().rangeTo(MAX_POSITION_NUMBER)
+                    .zip(position.letter.inc().rangeTo(MAX_POSITION_LETTER)),
+                pieceAt
+            )
+        )
+
+        possiblePositions.addAll(
+            possibleSequentialPositions(
+                position.number.dec().downTo(MIN_POSITION_NUMBER)
+                    .zip(position.letter.dec().downTo(MIN_POSITION_LETTER)),
+                pieceAt
+            )
+        )
+
+        return possiblePositions
     }
 }
