@@ -9,13 +9,8 @@ class Pawn(
 
     private var walks = 0
 
-    private fun canMoveTo(position: Position, pieceAt: (position: Position) -> Piece?): Boolean {
-        val possiblePositions = possiblePositions(pieceAt)
-        return possiblePositions.contains(position)
-    }
-
     override fun moveTo(position: Position, pieceAt: (position: Position) -> Piece?): Boolean {
-        if (!canMoveTo(position, pieceAt)) {
+        if (!possiblePositions(pieceAt).contains(position)) {
             return false
         }
 
