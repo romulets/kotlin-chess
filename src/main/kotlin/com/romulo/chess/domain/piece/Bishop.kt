@@ -2,6 +2,7 @@ package com.romulo.chess.domain.piece
 
 import com.romulo.chess.domain.Color
 import com.romulo.chess.domain.Position
+import com.romulo.chess.domain.nullablePosition
 
 
 class Bishop(

@@ -22,12 +22,12 @@ data class Position(
 
 const val MIN_POSITION_NUMBER: Int = 1
 const val MAX_POSITION_NUMBER: Int = 8
-const val MIN_POSITION_LETTER: Int = 97
-const val MAX_POSITION_LETTER: Int = 104
+const val MIN_POSITION_LETTER: Char = 'a'
+const val MAX_POSITION_LETTER: Char = 'h'
 
 fun validPosition(number: Int, letter: Char): Boolean {
     return number in MIN_POSITION_NUMBER..MAX_POSITION_NUMBER
-            && letter.toInt() in MIN_POSITION_LETTER..MAX_POSITION_LETTER
+            && letter in MIN_POSITION_LETTER..MAX_POSITION_LETTER
 }
 
 fun nullablePosition(number: Int, letter: Char): Position? {

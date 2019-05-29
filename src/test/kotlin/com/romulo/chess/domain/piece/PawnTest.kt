@@ -1,8 +1,11 @@
 package com.romulo.chess.domain.piece
 
-import com.romulo.chess.domain.Color.*
+import com.romulo.chess.domain.Color.BLACK
+import com.romulo.chess.domain.Color.WHITE
 import com.romulo.chess.domain.Position
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class PawnTest {
@@ -188,7 +191,10 @@ class PawnTest {
         )
 
         val to = Position(1, 'a')
-        assertFalse(pawn.moveTo(to, returnPieceIf(to::sameThat, BLACK)), "Black pawn cannot moveTo backward black right")
+        assertFalse(
+            pawn.moveTo(to, returnPieceIf(to::sameThat, BLACK)),
+            "Black pawn cannot moveTo backward black right"
+        )
     }
 
     @Test
@@ -222,8 +228,8 @@ class PawnTest {
         val possiblePositions: List<Position> = pawn.possiblePositions { null }
 
         assertEquals(2, possiblePositions.size)
-        assertTrue(possiblePositions.contains(Position(3, 'b')))
-        assertTrue(possiblePositions.contains(Position(4, 'b')))
+        assertPossiblePositionContains(possiblePositions, 3, 'b')
+        assertPossiblePositionContains(possiblePositions, 4, 'b')
     }
 
     @Test
@@ -240,9 +246,9 @@ class PawnTest {
         )
 
         assertEquals(3, possiblePositions.size)
-        assertTrue(possiblePositions.contains(Position(5, 'b')))
-        assertTrue(possiblePositions.contains(Position(5, 'c')))
-        assertTrue(possiblePositions.contains(Position(5, 'a')))
+        assertPossiblePositionContains(possiblePositions, 5, 'b')
+        assertPossiblePositionContains(possiblePositions, 5, 'c')
+        assertPossiblePositionContains(possiblePositions, 5, 'a')
     }
 
     @Test
@@ -255,7 +261,7 @@ class PawnTest {
         val possiblePositions: List<Position> = pawn.possiblePositions { null }
 
         assertEquals(2, possiblePositions.size)
-        assertTrue(possiblePositions.contains(Position(6, 'b')))
-        assertTrue(possiblePositions.contains(Position(5, 'b')))
+        assertPossiblePositionContains(possiblePositions, 6, 'b')
+        assertPossiblePositionContains(possiblePositions, 5, 'b')
     }
 }

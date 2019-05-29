@@ -2,8 +2,17 @@ package com.romulo.chess.domain
 
 import com.romulo.chess.domain.Color.BLACK
 import com.romulo.chess.domain.Color.WHITE
-import com.romulo.chess.domain.piece.*
-import org.junit.jupiter.api.Assertions.*
+import com.romulo.chess.domain.piece.Bishop
+import com.romulo.chess.domain.piece.King
+import com.romulo.chess.domain.piece.Knight
+import com.romulo.chess.domain.piece.Pawn
+import com.romulo.chess.domain.piece.Piece
+import com.romulo.chess.domain.piece.Queen
+import com.romulo.chess.domain.piece.Rook
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNull
+import org.junit.jupiter.api.Assertions.assertThrows
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import kotlin.reflect.KClass
 
