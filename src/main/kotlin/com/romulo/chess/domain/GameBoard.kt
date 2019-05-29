@@ -4,14 +4,23 @@ import com.romulo.chess.domain.Color.BLACK
 import com.romulo.chess.domain.Color.WHITE
 import com.romulo.chess.domain.piece.*
 import org.bson.types.ObjectId
+import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.Id
+import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.mongodb.core.mapping.Document
+import java.time.LocalDateTime
 
 @Document
 class GameBoard {
 
     @Id
     lateinit var id: String
+
+    @CreatedDate
+    lateinit var createdAt: LocalDateTime
+
+    @LastModifiedDate
+    lateinit var updatedAt: LocalDateTime
 
     var player: Color = WHITE
     var pieces: MutableList<Piece> = ArrayList()
