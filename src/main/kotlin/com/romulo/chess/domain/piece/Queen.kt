@@ -13,6 +13,13 @@ class Queen(
     }
 
     override fun possiblePositions(pieceAt: (position: Position) -> Piece?): List<Position> {
-        TODO("not implemented")
+        val possiblePositions = ArrayList<Position>()
+        val rook = Rook(color, position)
+        val bishop = Bishop(color, position)
+
+        possiblePositions.addAll(rook.possiblePositions(pieceAt))
+        possiblePositions.addAll(bishop.possiblePositions(pieceAt))
+
+        return possiblePositions
     }
 }
