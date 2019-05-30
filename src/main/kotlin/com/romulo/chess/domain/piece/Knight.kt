@@ -20,25 +20,14 @@ class Knight(
 
     override fun possiblePositions(pieceAt: (position: Position) -> Piece?): List<Position> {
         val possiblePositions = ArrayList<Position>()
-        possiblePosition(position.add(2, 1), pieceAt)?.let(possiblePositions::add)
-        possiblePosition(position.add(2, -1), pieceAt)?.let(possiblePositions::add)
-        possiblePosition(position.add(-2, 1), pieceAt)?.let(possiblePositions::add)
-        possiblePosition(position.add(-2, -1), pieceAt)?.let(possiblePositions::add)
-        possiblePosition(position.add(1, 2), pieceAt)?.let(possiblePositions::add)
-        possiblePosition(position.add(1, -2), pieceAt)?.let(possiblePositions::add)
-        possiblePosition(position.add(-1, 2), pieceAt)?.let(possiblePositions::add)
-        possiblePosition(position.add(-1, -2), pieceAt)?.let(possiblePositions::add)
+        emptyOrOpponentPosition(this, position.add(2, 1), pieceAt)?.let(possiblePositions::add)
+        emptyOrOpponentPosition(this, position.add(2, -1), pieceAt)?.let(possiblePositions::add)
+        emptyOrOpponentPosition(this, position.add(-2, 1), pieceAt)?.let(possiblePositions::add)
+        emptyOrOpponentPosition(this, position.add(-2, -1), pieceAt)?.let(possiblePositions::add)
+        emptyOrOpponentPosition(this, position.add(1, 2), pieceAt)?.let(possiblePositions::add)
+        emptyOrOpponentPosition(this, position.add(1, -2), pieceAt)?.let(possiblePositions::add)
+        emptyOrOpponentPosition(this, position.add(-1, 2), pieceAt)?.let(possiblePositions::add)
+        emptyOrOpponentPosition(this, position.add(-1, -2), pieceAt)?.let(possiblePositions::add)
         return possiblePositions
-    }
-
-    private fun possiblePosition(position: Position?, pieceAt: (position: Position) -> Piece?): Position? {
-        position?.let {
-            val possiblePiece = pieceAt(position)
-            if (possiblePiece == null || opponentPieces(this, possiblePiece)) {
-                return position
-            }
-        }
-
-        return null
     }
 }

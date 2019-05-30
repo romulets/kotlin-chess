@@ -29,20 +29,28 @@ fun possibleSequentialPositions(
     range: Iterable<Pair<Int, Char>>,
     pieceAt: (position: Position) -> Piece?
 ): List<Position> {
+
     val possiblePositions = ArrayList<Position>()
-
     for ((number, letter) in range) {
-        val possiblePosition = nullablePosition(number, letter) ?: break
-        val possiblePiece = pieceAt(possiblePosition)
+        val toPosition = nullablePosition(number, letter) ?: break
 
-        if (possiblePiece === null || opponentPieces(fromPiece, possiblePiece)) {
-            possiblePositions.add(possiblePosition)
-        }
+        emptyOrOpponentPosition(fromPiece, toPosition, pieceAt)?.let(possiblePositions::add)
 
-        if (possiblePiece !== null) {
+        if (pieceAt(toPosition) !== null) {
             break
         }
     }
 
     return possiblePositions
+}
+
+fun emptyOrOpponentPosition(fromPiece: Piece, position: Position?, pieceAt: (position: Position) -> Piece?): Position? {
+    position?.let {
+        val possiblePieceToEat = pieceAt(position)
+        if (possiblePieceToEat == null || opponentPieces(fromPiece, possiblePieceToEat)) {
+            return position
+        }
+    }
+
+    return null
 }
