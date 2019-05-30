@@ -25,7 +25,7 @@ fun opponentPieces(pieceOne: Piece?, pieceTwo: Piece?): Boolean {
 
 
 fun possibleSequentialPositions(
-    inittalPiece: Piece,
+    fromPiece: Piece,
     range: Iterable<Pair<Int, Char>>,
     pieceAt: (position: Position) -> Piece?
 ): List<Position> {
@@ -35,7 +35,7 @@ fun possibleSequentialPositions(
         val possiblePosition = nullablePosition(number, letter) ?: break
         val possiblePiece = pieceAt(possiblePosition)
 
-        if (possiblePiece === null || opponentPieces(inittalPiece, possiblePiece)) {
+        if (possiblePiece === null || opponentPieces(fromPiece, possiblePiece)) {
             possiblePositions.add(possiblePosition)
         }
 
