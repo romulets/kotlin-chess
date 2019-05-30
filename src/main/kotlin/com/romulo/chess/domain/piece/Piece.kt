@@ -5,7 +5,7 @@ import com.romulo.chess.domain.Color
 import com.romulo.chess.domain.Position
 import com.romulo.chess.domain.nullablePosition
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 interface Piece {
     val color: Color
     val position: Position
