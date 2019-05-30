@@ -29,6 +29,7 @@ class Bishop(
 
         possiblePositions.addAll(
             possibleSequentialPositions(
+                this,
                 position.number.dec().downTo(MIN_POSITION_NUMBER)
                     .zip(position.letter.inc().rangeTo(MAX_POSITION_LETTER)),
                 pieceAt
@@ -37,6 +38,7 @@ class Bishop(
 
         possiblePositions.addAll(
             possibleSequentialPositions(
+                this,
                 position.number.inc().rangeTo(MAX_POSITION_NUMBER)
                     .zip(position.letter.dec().downTo(MIN_POSITION_LETTER)),
                 pieceAt
@@ -45,6 +47,7 @@ class Bishop(
 
         possiblePositions.addAll(
             possibleSequentialPositions(
+                this,
                 position.number.inc().rangeTo(MAX_POSITION_NUMBER)
                     .zip(position.letter.inc().rangeTo(MAX_POSITION_LETTER)),
                 pieceAt
@@ -53,6 +56,7 @@ class Bishop(
 
         possiblePositions.addAll(
             possibleSequentialPositions(
+                this,
                 position.number.dec().downTo(MIN_POSITION_NUMBER)
                     .zip(position.letter.dec().downTo(MIN_POSITION_LETTER)),
                 pieceAt

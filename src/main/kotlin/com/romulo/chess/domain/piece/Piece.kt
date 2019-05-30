@@ -13,33 +13,36 @@ interface Piece {
     fun moveTo(position: Position, pieceAt: (position: Position) -> Piece? = { null }): Boolean
     fun possiblePositions(pieceAt: (position: Position) -> Piece?): List<Position>
 
-    fun isOpponentPiece(other: Piece?): Boolean {
-        if (other == null) {
-            return false
-        }
+}
 
-        return other.color != color
+fun opponentPieces(pieceOne: Piece?, pieceTwo: Piece?): Boolean {
+    if (pieceOne == null || pieceTwo == null) {
+        return false
     }
 
-    fun possibleSequentialPositions(
-        range: Iterable<Pair<Int, Char>>,
-        pieceAt: (position: Position) -> Piece?
-    ): List<Position> {
-        val possiblePositions = ArrayList<Position>()
+    return pieceOne.color != pieceTwo.color
+}
 
-        for ((number, letter) in range) {
-            val possiblePosition = nullablePosition(number, letter) ?: break
-            val piece = pieceAt(possiblePosition)
 
-            if (piece === null || isOpponentPiece(piece)) {
-                possiblePositions.add(possiblePosition)
-            }
+fun possibleSequentialPositions(
+    inittalPiece: Piece,
+    range: Iterable<Pair<Int, Char>>,
+    pieceAt: (position: Position) -> Piece?
+): List<Position> {
+    val possiblePositions = ArrayList<Position>()
 
-            if (piece !== null) {
-                break
-            }
+    for ((number, letter) in range) {
+        val possiblePosition = nullablePosition(number, letter) ?: break
+        val possiblePiece = pieceAt(possiblePosition)
+
+        if (possiblePiece === null || opponentPieces(inittalPiece, possiblePiece)) {
+            possiblePositions.add(possiblePosition)
         }
 
-        return possiblePositions
+        if (possiblePiece !== null) {
+            break
+        }
     }
+
+    return possiblePositions
 }

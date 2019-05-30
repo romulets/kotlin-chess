@@ -27,6 +27,7 @@ class Rook(
 
         possiblePositions.addAll(
             possibleSequentialPositions(
+                this,
                 position.number.dec().downTo(MIN_POSITION_NUMBER).map { num -> Pair(num, position.letter) },
                 pieceAt
             )
@@ -34,6 +35,7 @@ class Rook(
 
         possiblePositions.addAll(
             possibleSequentialPositions(
+                this,
                 position.number.inc().rangeTo(MAX_POSITION_NUMBER).map { num -> Pair(num, position.letter) },
                 pieceAt
             )
@@ -41,6 +43,7 @@ class Rook(
 
         possiblePositions.addAll(
             possibleSequentialPositions(
+                this,
                 position.letter.dec().downTo(MIN_POSITION_LETTER).map { let -> Pair(position.number, let) },
                 pieceAt
             )
@@ -48,6 +51,7 @@ class Rook(
 
         possiblePositions.addAll(
             possibleSequentialPositions(
+                this,
                 position.letter.inc().rangeTo(MAX_POSITION_LETTER).map { let -> Pair(position.number, let) },
                 pieceAt
             )
