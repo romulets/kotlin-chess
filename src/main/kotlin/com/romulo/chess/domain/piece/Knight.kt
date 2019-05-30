@@ -20,14 +20,14 @@ class Knight(
 
     override fun possiblePositions(pieceAt: (position: Position) -> Piece?): List<Position> {
         val possiblePositions = ArrayList<Position>()
-        emptyOrOpponentPosition(this, position.add(2, 1), pieceAt)?.let(possiblePositions::add)
-        emptyOrOpponentPosition(this, position.add(2, -1), pieceAt)?.let(possiblePositions::add)
-        emptyOrOpponentPosition(this, position.add(-2, 1), pieceAt)?.let(possiblePositions::add)
-        emptyOrOpponentPosition(this, position.add(-2, -1), pieceAt)?.let(possiblePositions::add)
-        emptyOrOpponentPosition(this, position.add(1, 2), pieceAt)?.let(possiblePositions::add)
-        emptyOrOpponentPosition(this, position.add(1, -2), pieceAt)?.let(possiblePositions::add)
-        emptyOrOpponentPosition(this, position.add(-1, 2), pieceAt)?.let(possiblePositions::add)
-        emptyOrOpponentPosition(this, position.add(-1, -2), pieceAt)?.let(possiblePositions::add)
+        getNotFriendPosition(this, position.add(2, 1), pieceAt)?.let(possiblePositions::add)
+        getNotFriendPosition(this, position.add(2, -1), pieceAt)?.let(possiblePositions::add)
+        getNotFriendPosition(this, position.add(-2, 1), pieceAt)?.let(possiblePositions::add)
+        getNotFriendPosition(this, position.add(-2, -1), pieceAt)?.let(possiblePositions::add)
+        getNotFriendPosition(this, position.add(1, 2), pieceAt)?.let(possiblePositions::add)
+        getNotFriendPosition(this, position.add(1, -2), pieceAt)?.let(possiblePositions::add)
+        getNotFriendPosition(this, position.add(-1, 2), pieceAt)?.let(possiblePositions::add)
+        getNotFriendPosition(this, position.add(-1, -2), pieceAt)?.let(possiblePositions::add)
         return possiblePositions
     }
 }

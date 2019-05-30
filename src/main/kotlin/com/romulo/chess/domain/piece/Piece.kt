@@ -34,7 +34,7 @@ fun possibleSequentialPositions(
     for ((number, letter) in range) {
         val toPosition = nullablePosition(number, letter) ?: break
 
-        emptyOrOpponentPosition(fromPiece, toPosition, pieceAt)?.let(possiblePositions::add)
+        getNotFriendPosition(fromPiece, toPosition, pieceAt)?.let(possiblePositions::add)
 
         if (pieceAt(toPosition) !== null) {
             break
@@ -44,7 +44,7 @@ fun possibleSequentialPositions(
     return possiblePositions
 }
 
-fun emptyOrOpponentPosition(fromPiece: Piece, position: Position?, pieceAt: (position: Position) -> Piece?): Position? {
+fun getNotFriendPosition(fromPiece: Piece, position: Position?, pieceAt: (position: Position) -> Piece?): Position? {
     position?.let {
         val possiblePieceToEat = pieceAt(position)
         if (possiblePieceToEat == null || opponentPieces(fromPiece, possiblePieceToEat)) {
