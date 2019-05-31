@@ -77,10 +77,17 @@ class GameBoard {
 
         movePiece(piece, to)
         eatPiece(possibleEatenPiece)
+
+        if (isCurrentKingInCheck()) {
+            throw IllegalArgumentException("You can't let your king in check")
+        }
+
         changePlayers()
 
         if (isCurrentKingInCheck()) {
             this.status = GameStatus.Check
+        } else {
+            this.status = GameStatus.OnGoing
         }
 
     }

@@ -139,6 +139,37 @@ class GameBoardTest {
         assertEquals(board.status, GameStatus.Check)
     }
 
+    @Test
+    fun testExitCheckScenario() {
+        val board = GameBoard()
+
+        board.play(Position(1, 'b'), Position(3, 'c'))
+        board.play(Position(7, 'c'), Position(5, 'c'))
+        board.play(Position(3, 'c'), Position(5, 'b'))
+        board.play(Position(7, 'd'), Position(5, 'd'))
+        board.play(Position(5, 'b'), Position(7, 'c'))
+
+        board.play(Position(8, 'd'), Position(7, 'c'))
+
+        assertEquals(board.status, GameStatus.OnGoing)
+    }
+
+    @Test
+    fun testNotExitCheckScenario() {
+        val board = GameBoard()
+
+        board.play(Position(1, 'b'), Position(3, 'c'))
+        board.play(Position(7, 'c'), Position(5, 'c'))
+        board.play(Position(3, 'c'), Position(5, 'b'))
+        board.play(Position(7, 'd'), Position(5, 'd'))
+        board.play(Position(5, 'b'), Position(7, 'c'))
+
+        assertThrows(IllegalArgumentException::class.java, {
+            board.play(Position(7, 'e'), Position(5, 'e'))
+        }, "King should exit check position")
+
+    }
+
 
     private fun assertRowIsAllPawns(gameBoard: GameBoard, row: Int, color: Color) {
         for (i in 97..104) {
