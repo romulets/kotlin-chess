@@ -19,15 +19,19 @@ class Knight(
     }
 
     override fun possiblePositions(pieceAt: (position: Position) -> Piece?): List<Position> {
-        val possiblePositions = ArrayList<Position>()
-        getNotFriendPosition(this, position.add(2, 1), pieceAt)?.let(possiblePositions::add)
-        getNotFriendPosition(this, position.add(2, -1), pieceAt)?.let(possiblePositions::add)
-        getNotFriendPosition(this, position.add(-2, 1), pieceAt)?.let(possiblePositions::add)
-        getNotFriendPosition(this, position.add(-2, -1), pieceAt)?.let(possiblePositions::add)
-        getNotFriendPosition(this, position.add(1, 2), pieceAt)?.let(possiblePositions::add)
-        getNotFriendPosition(this, position.add(1, -2), pieceAt)?.let(possiblePositions::add)
-        getNotFriendPosition(this, position.add(-1, 2), pieceAt)?.let(possiblePositions::add)
-        getNotFriendPosition(this, position.add(-1, -2), pieceAt)?.let(possiblePositions::add)
-        return possiblePositions
+        return getNotFriendPsositions(
+            this,
+            listOf(
+                position.add(2, 1),
+                position.add(2, -1),
+                position.add(-2, 1),
+                position.add(-2, -1),
+                position.add(1, 2),
+                position.add(1, -2),
+                position.add(-1, 2),
+                position.add(-1, -2)
+            ),
+            pieceAt
+        )
     }
 }
