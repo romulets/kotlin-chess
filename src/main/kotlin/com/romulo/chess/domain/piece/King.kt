@@ -5,7 +5,7 @@ import com.romulo.chess.domain.Position
 
 class King(
     override val color: Color,
-    override val position: Position
+    override var position: Position
 ) : Piece {
 
     override fun possiblePositions(pieceAt: (position: Position) -> Piece?): List<Position> {
@@ -26,6 +26,12 @@ class King(
     }
 
     override fun moveTo(position: Position, pieceAt: (position: Position) -> Piece?): Boolean {
-        TODO("not implemented")
+        if (!possiblePositions(pieceAt).contains(position)) {
+            return false
+        }
+
+        this.position = position
+
+        return true
     }
 }
