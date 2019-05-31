@@ -108,7 +108,7 @@ class GameBoard {
     private fun movePiece(piece: Piece, to: Position) {
         val couldMove = piece.moveTo(to, this::pieceAt)
         if (!couldMove) {
-            throw IllegalArgumentException("Invalid play")
+            throw IllegalArgumentException("Can't move from %s to %s".format(piece.position, to))
         }
     }
 

@@ -170,6 +170,20 @@ class GameBoardTest {
 
     }
 
+    @Test
+    fun testNotLetKingInCheck() {
+        val board = GameBoard()
+
+        board.play(Position(2, 'c'), Position(4, 'c'))
+        board.play(Position(7, 'c'), Position(5, 'c'))
+        board.play(Position(1, 'd'), Position(4, 'a'))
+
+        assertThrows(IllegalArgumentException::class.java, {
+            board.play(Position(7, 'd'), Position(5, 'd'))
+        }, "King shouldn't let your king in check")
+
+    }
+
 
     private fun assertRowIsAllPawns(gameBoard: GameBoard, row: Int, color: Color) {
         for (i in 97..104) {
