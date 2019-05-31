@@ -9,7 +9,20 @@ class King(
 ) : Piece {
 
     override fun possiblePositions(pieceAt: (position: Position) -> Piece?): List<Position> {
-        TODO("not implemented")
+        return getNotFriendPsositions(
+            this,
+            listOf(
+                position.add(1, 1),
+                position.add(1, 0),
+                position.add(1, -1),
+                position.add(0, 1),
+                position.add(0, -1),
+                position.add(-1, 1),
+                position.add(-1, 0),
+                position.add(-1, -1)
+            ),
+            pieceAt
+        )
     }
 
     override fun moveTo(position: Position, pieceAt: (position: Position) -> Piece?): Boolean {

@@ -54,3 +54,17 @@ fun getNotFriendPosition(fromPiece: Piece, position: Position?, pieceAt: (positi
 
     return null
 }
+
+fun getNotFriendPsositions(
+    fromPiece: Piece,
+    positions: List<Position?>,
+    pieceAt: (position: Position) -> Piece?
+): List<Position> {
+    val notFriendPositions = ArrayList<Position>()
+
+    for (position in positions) {
+        getNotFriendPosition(fromPiece, position, pieceAt)?.let(notFriendPositions::add)
+    }
+
+    return notFriendPositions
+}
