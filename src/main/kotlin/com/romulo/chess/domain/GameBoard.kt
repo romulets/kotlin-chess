@@ -9,6 +9,7 @@ import com.romulo.chess.domain.piece.Pawn
 import com.romulo.chess.domain.piece.Piece
 import com.romulo.chess.domain.piece.Queen
 import com.romulo.chess.domain.piece.Rook
+import com.romulo.chess.domain.piece.opponentPieces
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.LastModifiedDate
@@ -72,20 +73,36 @@ class GameBoard {
 
     fun play(from: Position, to: Position) {
         val piece = pieceAt(from) ?: throw IllegalArgumentException("Empty square")
-        val eatenPiece = pieceAt(to)
+        val possibleEatenPiece = pieceAt(to)
 
-        val couldMove = piece.moveTo(to, this::pieceAt)
+        movePiece(piece, to)
+        eatPiece(possibleEatenPiece)
+        changePlayers()
 
-        if (!couldMove) {
-            throw IllegalArgumentException("Invalid play")
+        if (isCurrentKingInCheck()) {
+            this.status = GameStatus.Check
         }
 
+    }
+
+    private fun isCurrentKingInCheck(): Boolean {
+        val king = pieces.find { piece -> piece is King && piece.color == player }!!
+        val opponentPieces = pieces.filter { piece -> piece.color != player }
+        return opponentPieces.any { piece -> piece.possiblePositions(this::pieceAt).contains(king.position) }
+    }
+
+    private fun eatPiece(eatenPiece: Piece?) {
         eatenPiece?.let {
             pieces.remove(eatenPiece)
             eatenPieces.add(eatenPiece)
         }
+    }
 
-        changePlayers()
+    private fun movePiece(piece: Piece, to: Position) {
+        val couldMove = piece.moveTo(to, this::pieceAt)
+        if (!couldMove) {
+            throw IllegalArgumentException("Invalid play")
+        }
     }
 
     private fun changePlayers() {

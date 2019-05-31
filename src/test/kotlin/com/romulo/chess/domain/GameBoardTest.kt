@@ -22,7 +22,7 @@ class GameBoardTest {
     fun testInitialState() {
         val gameBoard = GameBoard()
 
-        gameBoard.status = GameStatus.OnGoing
+        assertEquals(gameBoard.status, GameStatus.OnGoing)
 
         assertEquals(32, gameBoard.pieces.size)
         assertEquals(0, gameBoard.eatenPieces.size)
@@ -54,6 +54,19 @@ class GameBoardTest {
     }
 
     @Test
+    fun testPlay() {
+        val gameBoard = GameBoard()
+
+        gameBoard.play(Position(2, 'a'), Position(3, 'a'))
+
+        assertEquals(gameBoard.status, GameStatus.OnGoing)
+        assertPieceIs(
+            gameBoard,
+            Position(3, 'a'), Pawn::class, WHITE
+        )
+    }
+
+    @Test
     fun testPlayChangePlayers() {
         val gameBoard = GameBoard()
 
@@ -65,6 +78,7 @@ class GameBoardTest {
             gameBoard,
             Position(3, 'a'), Pawn::class, WHITE
         )
+
         assertEquals(BLACK, gameBoard.player)
     }
 
@@ -110,6 +124,19 @@ class GameBoardTest {
         assertEquals(1, board.eatenPieces.size)
 
         assertPieceIs(board, Position(5, 'f'), Pawn::class, WHITE)
+    }
+
+    @Test
+    fun testCheckScenario() {
+        val board = GameBoard()
+
+        board.play(Position(1, 'b'), Position(3, 'c'))
+        board.play(Position(7, 'c'), Position(5, 'c'))
+        board.play(Position(3, 'c'), Position(5, 'b'))
+        board.play(Position(7, 'd'), Position(5, 'd'))
+        board.play(Position(5, 'b'), Position(7, 'c'))
+
+        assertEquals(board.status, GameStatus.Check)
     }
 
 
