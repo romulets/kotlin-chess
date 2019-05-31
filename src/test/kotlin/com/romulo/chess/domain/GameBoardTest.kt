@@ -22,6 +22,8 @@ class GameBoardTest {
     fun testInitialState() {
         val gameBoard = GameBoard()
 
+        gameBoard.status = GameStatus.OnGoing
+
         assertEquals(32, gameBoard.pieces.size)
         assertEquals(0, gameBoard.eatenPieces.size)
 
@@ -109,6 +111,7 @@ class GameBoardTest {
 
         assertPieceIs(board, Position(5, 'f'), Pawn::class, WHITE)
     }
+
 
     private fun assertRowIsAllPawns(gameBoard: GameBoard, row: Int, color: Color) {
         for (i in 97..104) {

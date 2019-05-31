@@ -24,6 +24,8 @@ class GameBoard {
     @CreatedDate
     lateinit var createdAt: LocalDateTime
 
+    var status: GameStatus = GameStatus.OnGoing
+
     @LastModifiedDate
     lateinit var updatedAt: LocalDateTime
 
